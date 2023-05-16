@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Requests\PostRequest;
-
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +23,12 @@ Route::get('/', function () {
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     Route::get('/posts/create','create')->name('create');
     Route::post('/posts', 'store')->name('store');
+    Route::get('/posts/index','index')->name('index');
+    Route::get('/posts/{post}','show')->name('show');
+});
+
+Route::controller(CategoryController::class)->middleware(['auth'])->group(function(){
+    Route::get('/categories/{category}','index')->name('feel');
 });
 
 Route::get('/dashboard', function () {
