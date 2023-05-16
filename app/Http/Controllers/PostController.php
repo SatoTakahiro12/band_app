@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index(Post $post)
-    {
-        return $post->get();
-    }
     
     public function create(Category $category)
     {
@@ -26,10 +22,21 @@ class PostController extends Controller
         $id = Auth::id();   
         
         $input = array_merge($request['post'], array('user_id'=>$user->id));
+        //$input = ['user_id' => $request->user()->id];
        // $input = array_merge($input, array('category_id'=>$request->category_id));
         $post->fill($input)->save();
        
         return back()->with('message', '保存しました');
     }
     
+    public function index(Post $post)
+    {
+        return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);
+    }
+    
+    public function show(Post $post)
+    {
+        return view('posts/show')->with(['post' => $post]);
+    }
+
 }

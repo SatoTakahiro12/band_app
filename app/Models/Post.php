@@ -21,4 +21,14 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);   
+    }
+    
+    public function getPaginateByLimit(int $limit_count = 5)
+    {
+    return $this::with('category')->orderBy('updated_at', 'ASC')->paginate($limit_count);
+    }
 }
