@@ -31,4 +31,9 @@ class Post extends Model
     {
     return $this::with('category')->orderBy('updated_at', 'ASC')->paginate($limit_count);
     }
+    
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }
