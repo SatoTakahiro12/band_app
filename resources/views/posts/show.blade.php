@@ -26,6 +26,29 @@
                 </p>
             </div>
         </div>  
+        <span>
+            <img src="https://biz.addisteria.com/wp-content/uploads/2021/02/nicebutton.png" width="30px">
+            <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
+            @if($like)
+            <!-- 「いいね」取消用ボタンを表示 -->
+            	<a href="{{ route('unlike', $post) }}" class="btn btn-success btn-sm">
+            		いいね
+            		<!-- 「いいね」の数を表示 -->
+            		<span class="badge">
+            			{{ $post->likes->count() }}
+            		</span>
+            	</a>
+            @else
+            <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+            	<a href="{{ route('like', $post) }}" class="btn btn-secondary btn-sm">
+            		いいね
+            		<!-- 「いいね」の数を表示 -->
+            		<span class="badge">
+            			{{ $post->likes->count() }}
+            		</span>
+            	</a>
+            @endif
+        </span>
     </div>
     <div class="max-w-7xl mx-auto px-6">
          <x-primary-button class="mt-4 ml-4 mb-4">

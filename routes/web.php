@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LikeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,11 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
 
 Route::controller(CategoryController::class)->middleware(['auth'])->group(function(){
     Route::get('/categories/{category}','index')->name('feel');
+});
+
+Route::controller(LikeController::class)->middleware(['auth'])->group(function(){
+    Route::get('posts/{post}/like','like')->name('like');
+    Route::get('posts/{post}/unlike','unlike')->name('unlike');
 });
 
 Route::get('/dashboard', function () {
