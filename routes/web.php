@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CommentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +38,10 @@ Route::controller(LikeController::class)->middleware(['auth'])->group(function()
     Route::get('posts/{post}/like','like')->name('like');
     Route::get('posts/{post}/unlike','unlike')->name('unlike');
 });
+
+//Route::controller(CommentController::class)->middleware(['auth'])->group(function(){
+    //Route::post('/posts/{post}/comment_store', 'comment_store')->name('comment_store');
+//});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

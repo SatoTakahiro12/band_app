@@ -8,6 +8,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
+use App\Models\Comment;
 
 class PostController extends Controller
 {
@@ -30,9 +31,20 @@ class PostController extends Controller
         return back()->with('message', '保存しました');
     }
     
-    public function index(Post $post)
+    public function index(Post $post, Request $request) 
     {
-        return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);
+        $keyword = $request->input('keyword');
+
+        $query = Post::query();
+
+        if(!empty($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('body', 'LIKE', "%{$keyword}%");
+        }
+
+        //$posts = $query;
+        $posts= $query->orderBy("created_at","desc")->paginate(5);
+        return view('posts/index',compact('keyword','posts'));//->with(['keyword'=>$keyword, 'posts'=> $post->getPaginateByLimit()]);
     }
     
     public function show(Post $post)

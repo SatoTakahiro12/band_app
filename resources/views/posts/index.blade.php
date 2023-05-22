@@ -9,9 +9,17 @@
             <a href = "/posts/create">投稿する！</a>
         </x-primary-button>
     </div>
+    <!--投稿検索機能-->
+    <div class="max-w-7xl mx-auto px-6">
+        <form action= '/posts/index'method="GET" >
+            @csrf
+        　　<input type="text" name="keyword" value="{{ $keyword }}" placeholder="投稿を検索…">
+            <x-primary-button class="mt-4 ml-4 mb-4">検索</x-primary-button>
+        </form>
+    </div>
 
     <div class="mx-auto px-6">
-        <h1 class = "text-xl text-gray-800">---最新の投稿---</h1>
+        <h1 class = "text-xl text-gray-800">---投稿一覧（新しい順）---</h1>
         @foreach($posts as $post)
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
@@ -30,7 +38,7 @@
         </div>
         @endforeach
         <div class='mb-4'>
-            {{ $posts->links() }}
+            {{ $posts->appends(request()->input())->links() }}
         </div>
         
     </div>
