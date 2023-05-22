@@ -50,6 +50,25 @@
             @endif
         </span>
     </div>
+    <!--コメント機能-->
+    {{--<div class="mx-auto px-6">
+        @if(session('message'))
+            <div class="text-red-600 font-bold">
+                {{session('message')}}
+            </div>
+        @endif
+        <form method="post" action="/posts/{$post->id}}/comment_store">
+            @csrf
+        <div class="w-full flex flex-col">
+            <lavel for="body" class="font-semibold mt-4">コメント</lavel>
+            <p class="text__error text-sm text-red-600 space-y-1">{ $errors->first'comment.body') }}</p>
+            <textarea name="comment[body]" placeholder="コメント" class="w-auto py-2 border border-gray-300 rounded-md" id="comment" cols="30" row="5">{old'body')}}</textarea>
+        </div>
+        <x-primary-button class="mt-4">
+            送信
+        </x-primary-button>
+        </form>
+    </div>--}}
     <div class="max-w-7xl mx-auto px-6">
          <x-primary-button class="mt-4 ml-4 mb-4">
             <a href = "/posts/index">戻る</a>
