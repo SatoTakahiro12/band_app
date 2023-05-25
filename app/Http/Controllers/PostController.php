@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
 use App\Models\Comment;
+use Illuminate\Pagination\Paginator;
 
 class PostController extends Controller
 {
@@ -47,12 +48,12 @@ class PostController extends Controller
         return view('posts/index',compact('keyword','posts'));//->with(['keyword'=>$keyword, 'posts'=> $post->getPaginateByLimit()]);
     }
     
-    public function show(Post $post)
+    public function show(Post $post, Comment $comment)
     {
         $like=Like::where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
         //dd($like);
          //return view('posts/show', compact('post', 'like'));
-        return view('posts/show')->with(['post' => $post, 'like'=>$like]);
+        return view('posts/show')->with(['comments'=>$comment->get(),'post' => $post, 'like'=>$like]);
     }
 
 }
