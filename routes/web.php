@@ -39,13 +39,14 @@ Route::controller(LikeController::class)->middleware(['auth'])->group(function()
     Route::get('posts/{post}/unlike','unlike')->name('unlike');
 });
 
-//Route::controller(CommentController::class)->middleware(['auth'])->group(function(){
-    //Route::post('/posts/{post}/comment_store', 'comment_store')->name('comment_store');
-//});
+Route::controller(CommentController::class)->middleware(['auth'])->group(function(){
+    Route::post('/posts/{post}/comment_store', 'comment_store')->name('comment_store');
+    Route::get('/posts/{post}/comment_index','comment_index')->name('comment_index');
+});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {

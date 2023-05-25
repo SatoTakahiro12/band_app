@@ -50,25 +50,56 @@
             @endif
         </span>
     </div>
-    <!--コメント機能-->
-    {{--<div class="mx-auto px-6">
-        @if(session('message'))
-            <div class="text-red-600 font-bold">
-                {{session('message')}}
-            </div>
+    <!---コメント機能--->
+    <div class="mx-auto px-6">
+        <h1 class = "text-xl text-gray-800 ">---コメント一覧（新しい順）---</h1>
+        @foreach($comments as $comment)
+            @if($post->id == $comment->post_id)
+                <div class="mt-4 p-8 bg-white w-full rounded-2xl">
+                    <hr class="w-full">
+                    <p class="mt-4 p-4">
+                        {{$comment->body}}
+                    </p>
+                    <hr class="w-full">
+                    <div class="p-4 text-sm font-semibold">
+                        <p>
+                            ----{{$comment->created_at}}----
+                        </p>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    <form class="mb-4" method="POST" action="/posts/{$post->id}}/comment_store">
+    @csrf
+     <input name="post_id" type="hidden" value="{{ $post->id }}">
+     <div class="form-group">
+ 
+    <div class="form-group">
+     <label for="body">
+     本文
+     </label>
+ 
+        <textarea id="comment_body" name="body" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" rows="4">{{ old('body') }}</textarea>
+        @if ($errors->has('body'))
+         <div class="invalid-feedback">
+         {{ $errors->first('body') }}
+         </div>
         @endif
-        <form method="post" action="/posts/{$post->id}}/comment_store">
-            @csrf
-        <div class="w-full flex flex-col">
-            <lavel for="body" class="font-semibold mt-4">コメント</lavel>
-            <p class="text__error text-sm text-red-600 space-y-1">{ $errors->first'comment.body') }}</p>
-            <textarea name="comment[body]" placeholder="コメント" class="w-auto py-2 border border-gray-300 rounded-md" id="comment" cols="30" row="5">{old'body')}}</textarea>
-        </div>
+    </div>
+ 
+    <div class="mt-4">
         <x-primary-button class="mt-4">
-            送信
+            コメントする
         </x-primary-button>
-        </form>
-    </div>--}}
+    </div>
+</form>
+ 
+@if (session('commentstatus'))
+    <div class="alert alert-success mt-4 mb-4">
+     {{ session('commentstatus') }}
+    </div>
+@endif
+
     <div class="max-w-7xl mx-auto px-6">
          <x-primary-button class="mt-4 ml-4 mb-4">
             <a href = "/posts/index">戻る</a>
