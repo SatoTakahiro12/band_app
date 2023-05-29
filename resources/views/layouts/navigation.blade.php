@@ -38,7 +38,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('profile.index')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -72,7 +72,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('index')" :active="request()->routeIs('index')">
-                {{ __('投稿一覧') }}
+                {{ __('') }}
             </x-responsive-nav-link>
         </div>
 

@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->string('image_url')->nullable();
+            $table->text('fav_band',600)->nullable();
+            $table->text('fav_song',600)->nullable();
             $table->foreignId('user_id')->constrained();
-            //'user_id'は'usersテーブル'の'id'を参照する外部キー
-            $table->foreignId('category_id')->constrained();
-            //'category_id'は'categoriesテーブル'の'id'を参照する外部キー
-            $table->string('title', 50);
-            $table->text('body', 700);
-            $table->softDeletes();
+            
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('profiles');
     }
 };
