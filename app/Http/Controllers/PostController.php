@@ -26,7 +26,7 @@ class PostController extends Controller
         
         $input = array_merge($request['post'], array('user_id'=>$user->id));
         //$input = ['user_id' => $request->user()->id];
-       // $input = array_merge($input, array('category_id'=>$request->category_id));
+        //$input = array_merge($input, array('category_id'=>$request->category_id));
         $post->fill($input)->save();
        
         return back()->with('message', '保存しました');

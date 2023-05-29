@@ -26,6 +26,7 @@
                 </p>
             </div>
         </div>  
+        <!--いいね機能-->
         <span>
             <img src="https://biz.addisteria.com/wp-content/uploads/2021/02/nicebutton.png" width="30px">
             <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
@@ -63,7 +64,7 @@
                     <hr class="w-full">
                     <div class="p-4 text-sm font-semibold">
                         <p>
-                            ----{{$comment->created_at}}----
+                            ----{{$comment->created_at}}/{{$post->user->name}}----
                         </p>
                     </div>
                 </div>
@@ -92,13 +93,13 @@
             コメントする
         </x-primary-button>
     </div>
-</form>
+    </form>
  
-@if (session('commentstatus'))
-    <div class="alert alert-success mt-4 mb-4">
-     {{ session('commentstatus') }}
-    </div>
-@endif
+    @if (session('commentstatus'))
+        <div class="alert alert-success mt-4 mb-4">
+         {{ session('commentstatus') }}
+        </div>
+    @endif
 
     <div class="max-w-7xl mx-auto px-6">
          <x-primary-button class="mt-4 ml-4 mb-4">
