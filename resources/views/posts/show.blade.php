@@ -8,6 +8,22 @@
          <x-primary-button class="mt-4 ml-4 mb-4">
             <a href = "/posts/create">投稿する！</a>
         </x-primary-button>
+        @if($post->user_id === $user->id)
+        <div>
+                <a href="/posts/{{$post->id}}/post_edit">
+                    <x-primary-button>
+                        編集
+                    </x-primary-button>
+                </a>
+                <form method="post" action="/posts/{{ $post->id }}" class="flex-2">
+                    @csrf
+                    @method('delete')
+                    <x-primary-button class="bg-red-700 mt-2">
+                        削除
+                    </x-primary-button>
+                </form>
+        </div>
+        @endif
     </div>
 
     <div class="mx-auto px-6">

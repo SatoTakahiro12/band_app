@@ -28,6 +28,9 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::post('/posts', 'store')->name('store');
     Route::get('/posts/index','index')->name('index');
     Route::get('/posts/{post}','show')->name('show');
+    Route::get('/posts/{post}/post_edit','edit')->name('edit');
+    Route::put('/posts/{post}','update')->name('update');
+    Route::delete('/posts/{post}','delete')->name('delete');
 });
 
 Route::controller(CategoryController::class)->middleware(['auth'])->group(function(){
@@ -44,9 +47,9 @@ Route::controller(CommentController::class)->middleware(['auth'])->group(functio
     Route::get('/posts/{post}/comment_index','comment_index')->name('comment_index');
 });
 
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 
 Route::controller(ProfileController::class)->middleware('auth')->group(function () {

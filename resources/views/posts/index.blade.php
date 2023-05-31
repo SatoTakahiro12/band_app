@@ -20,6 +20,11 @@
 
     <div class="mx-auto px-6">
         <h1 class = "text-xl text-gray-800">---投稿一覧（新しい順）---</h1>
+          @if(session('message'))
+            <div class="text-red-600 font-bold">
+                {{session('message')}}
+            </div>
+        @endif
         @foreach($posts as $post)
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
