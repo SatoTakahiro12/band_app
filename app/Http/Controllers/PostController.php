@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
 use App\Models\Comment;
 use Illuminate\Pagination\Paginator;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -48,12 +49,39 @@ class PostController extends Controller
         return view('posts/index',compact('keyword','posts'));//->with(['keyword'=>$keyword, 'posts'=> $post->getPaginateByLimit()]);
     }
     
-    public function show(Post $post, Comment $comment)
+    public function show(Post $post, Comment $comment, User $user)
     {
+        $user = Auth::user();
+        $id = Auth::id();
+        
         $like=Like::where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
         //dd($like);
          //return view('posts/show', compact('post', 'like'));
-        return view('posts/show')->with(['comments'=>$comment->get(),'post' => $post, 'like'=>$like]);
+        return view('posts/show')->with(['comments'=>$comment->get(),'post' => $post, 'like'=>$like, 'user'=>$user]);
     }
-
+    
+    public function delete(Request $request, Post $post)
+    {
+        $post->delete();
+        $request->session()->flash('message','削除しました');
+        return redirect()->route('index');
+    }
+    
+    public function edit(Post $post,Category $category)
+    {
+        return view('posts/post_edit')->with(['post' => $post,'categories' =>$category->get()]);
+    }
+    
+    public function update(PostRequest $request, Post $post)
+     {
+        $user = Auth::user();
+        $id = Auth::id();   
+        
+        $input_post = array_merge($request['post'], array('user_id'=>$user->id));
+        //$input = ['user_id' => $request->user()->id];
+        //$input = array_merge($input, array('category_id'=>$request->category_id));
+        $post->fill($input_post)->save();
+       
+        return redirect('/posts/index')->with('message', '保存しました');
+    }
 }

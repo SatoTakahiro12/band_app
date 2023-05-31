@@ -85,9 +85,9 @@ class ProfileController extends Controller
     
     public function index(Profile $profile, Post $post)
     {
-        $query = Post::query();
+        //$query = Post::query();
         $profiles=Profile::where('user_id',auth()->id())->orderBy('created_at','desc')->take(1)->get();
-        $posts= $query->orderBy("created_at","desc")->paginate(5);
+        $posts=Post::where('user_id',auth()->id())->orderBy("created_at","desc")->paginate(5);
         return view('profile.partials.my_profile',compact('profiles','posts'));//->with(['profile'=>$profile->get()]);
         //return view('partials.my_profile')->with(['profiles'=>$profile]);
     }
