@@ -7,7 +7,6 @@ use App\Http\Requests\PostRequest;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +32,8 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::delete('/posts/{post}','delete')->name('delete');
 });
 
+//Route::post('/posts', 'temporary_store')->name('temporary_store');
+
 Route::controller(CategoryController::class)->middleware(['auth'])->group(function(){
     Route::get('/categories/{category}','index')->name('feel');
 });
@@ -57,8 +58,11 @@ Route::controller(ProfileController::class)->middleware('auth')->group(function 
     Route::patch('/profile/edit', 'update')->name('profile.update');
     Route::delete('/profile/edit', 'destroy')->name('profile.destroy');
     Route::post('/profile/edit', 'store')->name('profile.store');
-    Route::get('/profile','index')->name('profile.index');
+    Route::get('/profile/{profile}','index')->name('profile.index');
+    //Route::get('/profile/{id}','other_index')->name('other.profile.index');
     Route::put('/profile/edit', 'profile_update')->name('profile_update');
 });
+
+//Route::post('/attach-video', 'YouTubeController@attachVideo')->name('attach-video');
 
 require __DIR__.'/auth.php';

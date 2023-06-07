@@ -16,14 +16,14 @@
                 <div class="w-full flex flex-col">
                     <lavel for="title" class="font-semibold mt-4">タイトル</lavel>
                     <p class="title__error text-sm text-red-600 space-y-1">{{ $errors->first('post.title') }}</p>
-                    <input type="text" name="post[title]" placeholder="タイトル" class="w-auto py-2 border border-gray-300 rounded-md" id="title" value="{{old('title')}}">
+                    <input type="text" name="post[title]" placeholder="タイトル" class="w-auto py-2 border border-gray-300 rounded-md" id="title" value="{{ old('post.title')}}">
                 </div>
             </div>
         
         <div class="w-full flex flex-col">
             <lavel for="body" class="font-semibold mt-4">本文</lavel>
             <p class="body__error text-sm text-red-600 space-y-1">{{ $errors->first('post.body') }}</p>
-            <textarea name="post[body]" placeholder="例：〇〇のライブサイコーだった！" class="w-auto py-2 border border-gray-300 rounded-md" id="body" cols="30" row="5">{{old('body')}}</textarea>
+            <textarea name="post[body]" placeholder="例：〇〇のライブサイコーだった！" class="w-auto py-2 border border-gray-300 rounded-md" id="body" cols="30" row="5">{{old('post.body')}}</textarea>
         </div>
         <div class="mt-8">
              <lavel for="category" class="font-semibold mt-4">カテゴリー</lavel>
@@ -33,7 +33,10 @@
                 @endforeach
              </select>
         </div>
-        
+        <div class="mt-8">
+            <lavel for="url" class="font-semibold mt-4">youtube</lavel>
+                <input type="text" name="post[url]" placeholder="YouTubeのURL">
+        </div>
         <x-primary-button class="mt-4">
             送信
         </x-primary-button>

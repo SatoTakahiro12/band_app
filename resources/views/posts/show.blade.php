@@ -38,10 +38,54 @@
             <hr class="w-full">
             <div class="p-4 text-sm font-semibold">
                 <p>
-                    <a href="/categories/{{$post->category->id}}">{{$post->category->name}}</a>----{{$post->created_at}}/{{$post->user->name}}
+                    <a href="/categories/{{$post->category->id}}">{{$post->category->name}}</a>----{{$post->created_at}}/<a href="">{{$post->user->name}}</a>
                 </p>
             </div>
         </div>  
+        
+            <!-- youtube 機能-->
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player"></div>
+    
+    <script>
+    //youtubeのURLからvideoIdを取り出す関数
+    　　//urlを定義＆文字列として取りだす
+        const url = '<?php echo $post->url; ?>';
+        //上記のUrlを関数に引数として入れる
+        function get_video_Id_from_url(url)
+        {
+            //urlを正規表現にいれ、m[6]でvideoIdを取り出す
+            var m = url.match(/(http(s|):|)\/\/(www\.|)yout(.*?)\/(embed\/|watch.*?v=|)([a-z_A-Z0-9\-]{11})/);
+            var videoId=m[6];
+            return videoId;
+        }
+        
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        //変数定義
+        var player;
+        //関数にurlを入れた結果がvideoId
+        videoId = get_video_Id_from_url(url);
+
+        function onYouTubeIframeAPIReady() {
+            playersettings = {
+              height: '360',
+              width: '640',
+            };
+            playersettings.videoId = videoId;
+            player = new YT.Player('player', playersettings);
+        }
+        //playersettingsはプレーヤーの大きさ　videoIdは変数のため入れることができないので別で追加　
+        //YT.Playerはyoutubeの関数　playerはキー　playersettingsは値
+    </script>
+    
         <!--いいね機能-->
         <span>
             <img src="https://biz.addisteria.com/wp-content/uploads/2021/02/nicebutton.png" width="30px">
