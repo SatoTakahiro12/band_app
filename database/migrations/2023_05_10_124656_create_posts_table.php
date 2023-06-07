@@ -21,6 +21,7 @@ return new class extends Migration
             //'category_id'は'categoriesテーブル'の'id'を参照する外部キー
             $table->string('title', 50);
             $table->text('body', 700);
+            $table->text('url',100)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

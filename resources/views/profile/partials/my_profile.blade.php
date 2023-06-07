@@ -15,7 +15,6 @@
     <div></div>
 
     <div class="mx-auto px-6">
-         @foreach($profiles as $profile)
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <hr class="w-full">
             <div>
@@ -23,7 +22,7 @@
             </div>
             <hr class="w-full">
             <h1 class="p-4 text-lg font-semibold">
-                 {{ Auth::user()->name }}
+                 {{$profile->user->name}}
             </h1>
         </div>
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
@@ -46,13 +45,11 @@
             </p>
             <hr class="w-full">
         </div>
-        @endforeach
     </div>
-    <div class="mx-auto px-6">
+    {{--<div class="mx-auto px-6">
             <h1 class="p-6 text-lg font-semibold">
                 {{ __('---あなたの投稿---') }}
             </h1>
-        @foreach($posts as $post)
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
                 <a href="/posts/{{ $post->id }}">{{$post->title}}</a>
@@ -68,8 +65,7 @@
                 </p>
             </div>
         </div>
-        @endforeach
-    </div>
+    </div>--}}
     <div class="max-w-7xl mx-auto px-6">
          <x-primary-button class="mt-4 ml-4 mb-4">
             <a href = "/posts/index">戻る</a>

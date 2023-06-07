@@ -33,7 +33,20 @@ class PostController extends Controller
         return back()->with('message', '保存しました');
     }
     
-    public function index(Post $post, Request $request) 
+    /*public function temporary_store(PostRequest $request, Post $post)
+     {
+        $user = Auth::user();
+        $id = Auth::id();   
+        
+        $input = array_merge($request['post'], array('user_id'=>$user->id));
+        //$input = ['user_id' => $request->user()->id];
+        //$input = array_merge($input, array('category_id'=>$request->category_id));
+        $post->fill($input)->save();
+       
+        return back()->with('message', '保存しました');
+    }*/
+    
+    public function index(Post $post, Request $request, User $user) 
     {
         $keyword = $request->input('keyword');
 
@@ -46,7 +59,7 @@ class PostController extends Controller
 
         //$posts = $query;
         $posts= $query->orderBy("created_at","desc")->paginate(5);
-        return view('posts/index',compact('keyword','posts'));//->with(['keyword'=>$keyword, 'posts'=> $post->getPaginateByLimit()]);
+        return view('posts/index',compact('keyword','posts','user',));//->with(['keyword'=>$keyword, 'posts'=> $post->getPaginateByLimit()]);
     }
     
     public function show(Post $post, Comment $comment, User $user)

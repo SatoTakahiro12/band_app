@@ -37,11 +37,11 @@
             <hr class="w-full">
             <div class="p-4 text-sm font-semibold">
                 <p>
-                    <a href="/categories/{{$post->category->id}}">{{$post->category->name}}</a>----{{$post->created_at}}/{{$post->user->name}}
+                    <a href="/categories/{{$post->category->id}}">{{$post->category->name}}</a>----{{$post->created_at}}/<a href="{{route('profile.index',$post->user->profile->id)}}">{{$post->user->name}}</a>
                 </p>
             </div>
         </div>
-        @endforeach
+        @endforeach        
         <div class='mb-4'>
             {{ $posts->appends(request()->input())->links() }}
         </div>

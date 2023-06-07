@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Profile;
+use App\Models\User;
+
 
 class Post extends Model
 {
@@ -15,7 +18,8 @@ class Post extends Model
         'title',
         'body',
         'category_id',
-        'user_id'
+        'user_id',
+        'url'
         ];
         
     public function category()
@@ -47,4 +51,10 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    
+    public function profile()
+    {
+        return $this->belongsTo(Profile::class);
+    }
+    
 }
