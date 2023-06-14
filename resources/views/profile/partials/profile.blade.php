@@ -11,8 +11,34 @@
         <x-primary-button class="mt-4 ml-4 mb-4">
             <a href="/profile/edit">プロフィールを編集する</a>
         </x-primary-button>
+        
+        <!--フォロー機能-->
+        
+            <!-- もし$followがあれば＝ユーザーが「フォロー」をしていたら -->
+            @if($follow)
+            <!-- 「フォロー」取消用ボタンを表示 -->
+            <x-primary-button class="mt-4 ml-4 mb-4">
+            	<a href="{{ route('unfollow', ['user'=>$profile]) }}">
+            		フォローを解除
+            	</a>
+            </x-primary-button>
+            @else
+            <!-- まだユーザーが「フォロー」をしていなければ、「フォロー」ボタンを表示 -->
+            <x-primary-button class="mt-4 ml-4 mb-4">
+            	<a href="{{ route('follow', ['user'=>$profile]) }}">
+            		フォロー
+            	</a>
+            </x-primary-button>
+            @endif
+            
+            @if(session('message'))
+            <div class="text-red-600 font-bold">
+                {{session('message')}}
+            </div>
+        @endif
+        
     </div>
-    <div></div>
+    
 
     <div class="mx-auto px-6">
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">

@@ -12,6 +12,7 @@ use App\Models\Profile;
 use Cloudinary;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\FollowUser;
 
 class ProfileController extends Controller
 {
@@ -73,7 +74,6 @@ class ProfileController extends Controller
             'user_id'=>$user->id,
             'fav_band' => $request->fav_band,
             'fav_song' => $request->fav_song,
-            //'image'=>$request->image_url,
         ];
         if($request->file('image')){
         $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
@@ -84,7 +84,7 @@ class ProfileController extends Controller
         return back()->with('message', '保存しました');
     }
     
-    public function index(Profile $profile, Post $post, User $user)
+    public function index(Profile $profile, User $user)
     {
         /*$user = Auth::user();
         $id = Auth::id();
@@ -93,7 +93,9 @@ class ProfileController extends Controller
         
         /*$posts=Post::where('user_id',auth()->id())->orderBy("created_at","desc")->paginate(5);*/
         
-        return view('profile.partials.my_profile')->with(['profile'=>$profile, 'post'=>$post, 'user'=>$user]);//->with(['profile'=>$profile->get()]);
+        $follow = FollowUser::where('following_user_id', \Auth::user()->id)->where('followed_user_id', $profile->user->id)->first();
+        
+        return view('profile.partials.profile')->with(['profile'=>$profile, 'user'=>$user, 'follow'=>$follow]);//->with(['profile'=>$profile->get()]);
         //return view('partials.my_profile')->with(['profiles'=>$profile]);
     }
     
