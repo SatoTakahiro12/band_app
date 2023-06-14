@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,6 +64,9 @@ Route::controller(ProfileController::class)->middleware('auth')->group(function 
     Route::put('/profile/edit', 'profile_update')->name('profile_update');
 });
 
-//Route::post('/attach-video', 'YouTubeController@attachVideo')->name('attach-video');
+Route::controller(FollowUserController::class)->middleware(['auth'])->group(function(){
+    Route::get('profile/{user}/follow','follow')->name('follow');
+    Route::get('profile/{user}/unfollow','unfollow')->name('unfollow');
+});
 
 require __DIR__.'/auth.php';
