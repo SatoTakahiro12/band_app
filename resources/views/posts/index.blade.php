@@ -18,7 +18,7 @@
         </form>
     </div>
 
-    <div class="mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
         <h1 class = "text-xl text-gray-800">---投稿一覧（新しい順）---</h1>
           @if(session('message'))
             <div class="text-red-600 font-bold">
@@ -29,15 +29,17 @@
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
                 <a href="/posts/{{ $post->id }}">{{$post->title}}</a>
-            </h1>
-            <hr class="w-full">
+            </h1><hr class="w-full">
+            
             <p class="mt-4 p-4">
                 {{$post->body}}
             </p>
             <hr class="w-full">
             <div class="p-4 text-sm font-semibold">
                 <p>
-                    <a href="/categories/{{$post->category->id}}">{{$post->category->name}}</a>----{{$post->created_at}}/<a href="{{route('profile.index',$post->user->profile->id)}}">{{$post->user->name}}</a>
+                    <a href="/categories/{{$post->category->id}}">{{$post->category->name}}</a>
+                    ----{{$post->created_at}}/
+                    <a href="{{route('profile.index',$post->user->profile->id)}}">{{$post->user->name}}</a>
                 </p>
             </div>
         </div>

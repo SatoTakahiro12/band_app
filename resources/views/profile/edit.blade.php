@@ -6,7 +6,7 @@
     </x-slot>
     <div class="max-w-7xl mx-auto px-6">
          <x-primary-button class="mt-4 ml-4 mb-4">
-            <a href = "/profile">プロフィール画面へ戻る</a>
+            <a href = "{{route('profile.my_profile')}}">プロフィール画面へ戻る</a>
         </x-primary-button>
     </div>
     <div class="py-12">
