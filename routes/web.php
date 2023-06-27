@@ -8,6 +8,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowUserController;
+use App\Http\Controllers\ChatController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +57,7 @@ Route::get('/dashboard', function () {
 
 
 Route::controller(ProfileController::class)->middleware('auth')->group(function () {
+    Route::get('/profile/my_profile','my_profile')->name('profile.my_profile');
     Route::get('/profile/edit', 'edit')->name('profile.edit');
     Route::patch('/profile/edit', 'update')->name('profile.update');
     Route::delete('/profile/edit', 'destroy')->name('profile.destroy');
@@ -67,6 +70,15 @@ Route::controller(ProfileController::class)->middleware('auth')->group(function 
 Route::controller(FollowUserController::class)->middleware(['auth'])->group(function(){
     Route::get('profile/{user}/follow','follow')->name('follow');
     Route::get('profile/{user}/unfollow','unfollow')->name('unfollow');
+});
+
+
+Route::controller(ChatController::class)->middleware(['auth'])->group(function(){
+    Route::get('/profile/room/{user}/{myuser}','chat_index')->name('users.room');
+    //Route::get('/profile/room/messages','get_messages')->name('get_messages');
+    Route::match(['get', 'post'],'/profile/room','store_messages')->name('store_messages');
+    Route::get('/result/ajax', 'get_messages')->name('get_messages');
+    
 });
 
 require __DIR__.'/auth.php';

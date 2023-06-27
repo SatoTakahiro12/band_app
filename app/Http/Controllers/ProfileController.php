@@ -19,6 +19,15 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    
+    public function my_profile(Request $request, Profile $profile)
+    {
+        $profile=Profile::where('user_id',auth()->id())->orderBy('created_at','desc')->take(1)->get();
+        $post=Post::where('user_id',auth()->id())->orderBy('created_at','desc')->get();
+        
+        return view('profile.partials.my_profile')->with(['profiles'=>$profile, 'posts'=>$post]);
+    }
+    
     public function edit(Request $request, Profile $profile): View
     {
         $profiles=Profile::where('user_id',auth()->id())->orderBy('created_at','desc')->take(1)->get();
@@ -97,11 +106,6 @@ class ProfileController extends Controller
         
         return view('profile.partials.profile')->with(['profile'=>$profile, 'user'=>$user, 'follow'=>$follow]);//->with(['profile'=>$profile->get()]);
         //return view('partials.my_profile')->with(['profiles'=>$profile]);
-    }
-    
-    public function other_index(Profile $profile, Post $post)
-    {
-        
     }
     
     public function profile_update(Request $request, Profile $profile)

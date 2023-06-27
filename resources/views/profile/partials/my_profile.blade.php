@@ -11,47 +11,15 @@
         <x-primary-button class="mt-4 ml-4 mb-4">
             <a href="/profile/edit">プロフィールを編集する</a>
         </x-primary-button>
-        
-        <!--フォロー機能-->
-        
-            <!-- もし$followがあれば＝ユーザーが「フォロー」をしていたら -->
-            @if($follow)
-            <!-- 「フォロー」取消用ボタンを表示 -->
-            <x-primary-button class="mt-4 ml-4 mb-4">
-            	<a href="{{ route('unfollow', ['user'=>$profile]) }}">
-            		フォローを解除
-            	</a>
-            </x-primary-button>
-            @else
-            <!-- まだユーザーが「フォロー」をしていなければ、「フォロー」ボタンを表示 -->
-            <x-primary-button class="mt-4 ml-4 mb-4">
-            	<a href="{{ route('follow', ['user'=>$profile]) }}">
-            		フォロー
-            	</a>
-            </x-primary-button>
-            @endif
-            
-            @if(session('message'))
-            <div class="text-red-600 font-bold">
-                {{session('message')}}
-            </div>
-        @endif
-        
-        <!--チャット機能-->
-        <x-primary-button class="mt-4 ml-4 mb-4">
-        	<a href="{{ route('users.room', ['user'=>$profile, 'myuser'=>Auth::id()]) }}">
-        	    二人で語る！
-        	</a>
-        </x-primary-button>
-        
     </div>
     
 
-    <div class="mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <hr class="w-full">
+            @foreach($profiles as $profile)
             <div>
-                <img src="{{$profile->image_url}}"　alt="画像が読み込めません" style="width: 150px; height: 100px;"/>
+                    <img src="{{$profile->image_url}}"　alt="画像が読み込めません" style="width: 150px; height: 100px;"/>
             </div>
             <hr class="w-full">
             <h1 class="p-4 text-lg font-semibold">
@@ -78,11 +46,13 @@
             </p>
             <hr class="w-full">
         </div>
+        @endforeach
     </div>
-    {{--<div class="mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
             <h1 class="p-6 text-lg font-semibold">
                 {{ __('---あなたの投稿---') }}
             </h1>
+        @foreach($posts as $post)
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
                 <a href="/posts/{{ $post->id }}">{{$post->title}}</a>
@@ -98,10 +68,6 @@
                 </p>
             </div>
         </div>
-    </div>--}}
-    <div class="max-w-7xl mx-auto px-6">
-         <x-primary-button class="mt-4 ml-4 mb-4">
-            <a href = "/posts/index">戻る</a>
-        </x-primary-button>
+        @endforeach
     </div>
 </x-app-layout>
