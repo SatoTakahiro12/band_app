@@ -11,7 +11,15 @@
 　This application allows you to tell us what you think of the band's songs and live shows, as well as your favorite songs. You can also find set lists of gigs and people to go with.
 　
  Our goal is that people who like the band and people who don't know the band can interact with each other through this app.
+ 
+## List of Functions
 
-##　Treatment
-
-#login
+# login
+# CRUD
+# Like
+# Comments on Submission
+# Post search 
+# Profile
+# Attach YouTube video to your post
+# Friend
+# DM
