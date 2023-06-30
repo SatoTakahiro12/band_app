@@ -14,12 +14,12 @@
  
 ## List of Functions
 
-# login
-# CRUD
-# Like
-# Comments on Submission
-# Post search 
-# Profile
-# Attach YouTube video to your post
-# Friend
-# DM
+#### login
+#### CRUD
+#### Like
+#### Comments on Submission
+#### Post search 
+#### Profile
+#### Attach YouTube video to your post
+#### Friend
+#### DM
