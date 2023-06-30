@@ -1,4 +1,4 @@
-<p align="center"><a href="https://band-app-c75ed6979c7d.herokuapp.com/" target="_blank"><img src="image_6487327.jpg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://band-app-c75ed6979c7d.herokuapp.com/" target="_blank"><img src="image_6487327.jpg" width="400" alt="ばんどちゃんねる！ Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
