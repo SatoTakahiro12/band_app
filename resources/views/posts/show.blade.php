@@ -43,7 +43,7 @@
             </div>
         </div>  
         
-            <!-- youtube 機能-->
+    <!-- youtube 機能-->
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
     
