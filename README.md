@@ -26,6 +26,6 @@
 
 ## Test account
 
-### Name:test01
-### Email:12345@ezweb.ne.jp
-### Password:12345abcde
+#### Name:test01
+#### Email:12345@ezweb.ne.jp
+#### Password:12345abcde
