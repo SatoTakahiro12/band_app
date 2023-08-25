@@ -26,7 +26,7 @@
         @endif
     </div>
 
-    <div class="mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
                 {{$post->title}}
@@ -43,7 +43,7 @@
             </div>
         </div>  
         
-            <!-- youtube 機能-->
+    <!-- youtube 機能-->
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
     
@@ -112,7 +112,7 @@
         </span>
     </div>
     <!---コメント機能--->
-    <div class="mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
         <h1 class = "text-xl text-gray-800 ">---コメント一覧（新しい順）---</h1>
         @foreach($comments as $comment)
             @if($post->id == $comment->post_id)

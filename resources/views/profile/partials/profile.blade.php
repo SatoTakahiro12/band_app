@@ -8,9 +8,12 @@
         <x-primary-button class="mt-4 ml-4 mb-4">
             <a href = "/posts/create">投稿する！</a>
         </x-primary-button>
+        
+        @if($profile->user_id === \Auth::user()->id)
         <x-primary-button class="mt-4 ml-4 mb-4">
             <a href="/profile/edit">プロフィールを編集する</a>
         </x-primary-button>
+        @endif
         
         <!--フォロー機能-->
         
@@ -47,7 +50,7 @@
     </div>
     
 
-    <div class="mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <hr class="w-full">
             <div>

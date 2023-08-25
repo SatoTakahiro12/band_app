@@ -10,12 +10,12 @@
         </x-primary-button>
     </div>
 
-    <div class="mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
         <h1 class = "text-xl text-gray-800"></h1>
         @foreach($posts as $post)
         <div class="mt-4 p-8 bg-white w-full rounded-2xl">
             <h1 class="p-4 text-lg font-semibold">
-                <a href = "">{{$post->title}}</a>
+                <a href = "/posts/{{ $post->id }}">{{$post->title}}</a>
             </h1>
             <hr class="w-full">
             <p class="mt-4 p-4">
@@ -24,7 +24,8 @@
             <hr class="w-full">
             <div class="p-4 text-sm font-semibold">
                 <p>
-                    {{$post->category->name}}----{{$post->created_at}}/{{$post->user->name}}
+                    {{$post->category->name}}----{{$post->created_at}}/
+                    <a href = "{{route('profile.index',$post->user->profile->id)}}">{{$post->user->name}}</a>
                 </p>
             </div>
         </div>
